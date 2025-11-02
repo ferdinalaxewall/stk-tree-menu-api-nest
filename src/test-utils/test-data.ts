@@ -18,10 +18,10 @@ export const validCreateChildMenuDto: CreateMenuDto = {
 };
 
 export const invalidCreateMenuDto = {
-  name: '', // Invalid: empty name
-  slug: 123, // Invalid: should be string
-  depth: 0, // Invalid: should be >= 1
-  order: -1, // Invalid: negative order
+  name: '',
+  slug: 123,
+  depth: 0,
+  order: -1,
 };
 
 export const validUpdateMenuDto: UpdateMenuDto = {
