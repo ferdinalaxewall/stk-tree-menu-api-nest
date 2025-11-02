@@ -9,31 +9,36 @@ export async function seedMenus() {
     try {
         console.log('🌱 Starting menu seeding...');
 
-        // Sample menu data with hierarchical structure
         const menuData = [
             {
                 name: 'Dashboard',
                 slug: 'dashboard',
+                order: 0,
             },
             {
                 name: 'Products',
                 slug: 'products',
+                order: 1,
             },
             {
                 name: 'Orders',
                 slug: 'orders',
+                order: 2,
             },
             {
                 name: 'Customers',
                 slug: 'customers',
+                order: 3,
             },
             {
                 name: 'Reports',
                 slug: 'reports',
+                order: 4,
             },
             {
                 name: 'Settings',
                 slug: 'settings',
+                order: 5,
             },
         ];
 
@@ -41,7 +46,7 @@ export async function seedMenus() {
         for (const menuItem of menuData) {
             const created = await menuService.create(menuItem);
             createdRootMenus.push(created);
-            console.log(`✅ Created root menu: ${menuItem.name}`);
+            console.log(`✅ Created root menu: ${menuItem.name} (Order: ${menuItem.order})`);
         }
 
         const productsMenu = createdRootMenus.find(menu => menu.slug === 'products');
@@ -51,52 +56,52 @@ export async function seedMenus() {
         const settingsMenu = createdRootMenus.find(menu => menu.slug === 'settings');
 
         const subMenusData = [
-            { name: 'All Products', slug: 'all-products', parentId: productsMenu?.id },
-            { name: 'Add Product', slug: 'add-product', parentId: productsMenu?.id },
-            { name: 'Categories', slug: 'categories', parentId: productsMenu?.id },
-            { name: 'Inventory', slug: 'inventory', parentId: productsMenu?.id },
+            { name: 'All Products', slug: 'all-products', parentId: productsMenu?.id, order: 0 },
+            { name: 'Add Product', slug: 'add-product', parentId: productsMenu?.id, order: 1 },
+            { name: 'Categories', slug: 'categories', parentId: productsMenu?.id, order: 2 },
+            { name: 'Inventory', slug: 'inventory', parentId: productsMenu?.id, order: 3 },
 
-            { name: 'All Orders', slug: 'all-orders', parentId: ordersMenu?.id },
-            { name: 'Pending Orders', slug: 'pending-orders', parentId: ordersMenu?.id },
-            { name: 'Completed Orders', slug: 'completed-orders', parentId: ordersMenu?.id },
-            { name: 'Cancelled Orders', slug: 'cancelled-orders', parentId: ordersMenu?.id },
+            { name: 'All Orders', slug: 'all-orders', parentId: ordersMenu?.id, order: 0 },
+            { name: 'Pending Orders', slug: 'pending-orders', parentId: ordersMenu?.id, order: 1 },
+            { name: 'Completed Orders', slug: 'completed-orders', parentId: ordersMenu?.id, order: 2 },
+            { name: 'Cancelled Orders', slug: 'cancelled-orders', parentId: ordersMenu?.id, order: 3 },
 
-            { name: 'All Customers', slug: 'all-customers', parentId: customersMenu?.id },
-            { name: 'Customer Groups', slug: 'customer-groups', parentId: customersMenu?.id },
+            { name: 'All Customers', slug: 'all-customers', parentId: customersMenu?.id, order: 0 },
+            { name: 'Customer Groups', slug: 'customer-groups', parentId: customersMenu?.id, order: 1 },
 
-            { name: 'Sales Report', slug: 'sales-report', parentId: reportsMenu?.id },
-            { name: 'Product Report', slug: 'product-report', parentId: reportsMenu?.id },
-            { name: 'Customer Report', slug: 'customer-report', parentId: reportsMenu?.id },
+            { name: 'Sales Report', slug: 'sales-report', parentId: reportsMenu?.id, order: 0 },
+            { name: 'Product Report', slug: 'product-report', parentId: reportsMenu?.id, order: 1 },
+            { name: 'Customer Report', slug: 'customer-report', parentId: reportsMenu?.id, order: 2 },
 
-            { name: 'General Settings', slug: 'general-settings', parentId: settingsMenu?.id },
-            { name: 'User Management', slug: 'user-management', parentId: settingsMenu?.id },
-            { name: 'System Settings', slug: 'system-settings', parentId: settingsMenu?.id },
+            { name: 'General Settings', slug: 'general-settings', parentId: settingsMenu?.id, order: 0 },
+            { name: 'User Management', slug: 'user-management', parentId: settingsMenu?.id, order: 1 },
+            { name: 'System Settings', slug: 'system-settings', parentId: settingsMenu?.id, order: 2 },
         ];
 
         const createdSubMenus = [];
         for (const subMenuItem of subMenusData) {
             const created = await menuService.create(subMenuItem);
             createdSubMenus.push(created);
-            console.log(`✅ Created sub-menu: ${subMenuItem.name}`);
+            console.log(`✅ Created sub-menu: ${subMenuItem.name} (Order: ${subMenuItem.order})`);
         }
 
         const categoriesMenu = createdSubMenus.find(menu => menu.slug === 'categories');
         const userManagementMenu = createdSubMenus.find(menu => menu.slug === 'user-management');
 
         const thirdLevelMenusData = [
-            { name: 'Electronics', slug: 'electronics', parentId: categoriesMenu?.id },
-            { name: 'Clothing', slug: 'clothing', parentId: categoriesMenu?.id },
-            { name: 'Books', slug: 'books', parentId: categoriesMenu?.id },
-            { name: 'Home & Garden', slug: 'home-garden', parentId: categoriesMenu?.id },
+            { name: 'Electronics', slug: 'electronics', parentId: categoriesMenu?.id, order: 0 },
+            { name: 'Clothing', slug: 'clothing', parentId: categoriesMenu?.id, order: 1 },
+            { name: 'Books', slug: 'books', parentId: categoriesMenu?.id, order: 2 },
+            { name: 'Home & Garden', slug: 'home-garden', parentId: categoriesMenu?.id, order: 3 },
 
-            { name: 'All Users', slug: 'all-users', parentId: userManagementMenu?.id },
-            { name: 'Roles & Permissions', slug: 'roles-permissions', parentId: userManagementMenu?.id },
-            { name: 'User Groups', slug: 'user-groups', parentId: userManagementMenu?.id },
+            { name: 'All Users', slug: 'all-users', parentId: userManagementMenu?.id, order: 0 },
+            { name: 'Roles & Permissions', slug: 'roles-permissions', parentId: userManagementMenu?.id, order: 1 },
+            { name: 'User Groups', slug: 'user-groups', parentId: userManagementMenu?.id, order: 2 },
         ];
 
         for (const thirdLevelMenuItem of thirdLevelMenusData) {
             await menuService.create(thirdLevelMenuItem);
-            console.log(`✅ Created third-level menu: ${thirdLevelMenuItem.name}`);
+            console.log(`✅ Created third-level menu: ${thirdLevelMenuItem.name} (Order: ${thirdLevelMenuItem.order})`);
         }
 
         console.log('🎉 Menu seeding completed successfully!');
@@ -110,7 +115,6 @@ export async function seedMenus() {
     }
 }
 
-// Run seeding if this file is executed directly
 if (require.main === module) {
     seedMenus()
         .then(() => {

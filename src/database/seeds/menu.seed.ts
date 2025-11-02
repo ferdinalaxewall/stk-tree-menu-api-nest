@@ -7,7 +7,6 @@ export class MenuSeeder {
 
         await menuRepository.delete({});
 
-        // Sample menu data with hierarchical structure
         const menuData = [
             {
                 name: 'Dashboard',

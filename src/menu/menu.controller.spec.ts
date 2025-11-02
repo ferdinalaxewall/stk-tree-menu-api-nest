@@ -369,17 +369,14 @@ describe('MenuController', () => {
       const updateDto: UpdateMenuDto = { name: 'Updated Menu' };
       const updatedMenu = { ...createdMenu, ...updateDto };
 
-      // Create
       mockMenuService.create.mockResolvedValue(createdMenu);
       const created = await controller.create(createDto);
       expect(created).toEqual(createdMenu);
 
-      // Read
       mockMenuService.findOne.mockResolvedValue(createdMenu);
       const found = await controller.findOne(createdMenu.id);
       expect(found).toEqual(createdMenu);
 
-      // Update
       mockMenuService.update.mockResolvedValue(updatedMenu);
       const updated = await controller.update(createdMenu.id, updateDto);
       expect(updated.name).toBe('Updated Menu');

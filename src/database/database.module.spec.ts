@@ -109,7 +109,6 @@ describe('DatabaseModule', () => {
 
   describe('error handling', () => {
     it('should handle database connection errors gracefully', async () => {
-      // Mock a connection error scenario
       const mockConfigServiceWithError = {
         get: jest.fn(() => {
           throw new Error('Configuration error');

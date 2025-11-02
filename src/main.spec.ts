@@ -2,14 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-// Mock NestFactory
 jest.mock('@nestjs/core', () => ({
   NestFactory: {
     create: jest.fn(),
   },
 }));
 
-// Mock SwaggerModule
 jest.mock('@nestjs/swagger', () => ({
   SwaggerModule: {
     createDocument: jest.fn(),
@@ -35,10 +33,8 @@ describe('Main Bootstrap', () => {
   let mockDocumentBuilder: jest.MockedClass<typeof DocumentBuilder>;
 
   beforeEach(() => {
-    // Reset all mocks
     jest.clearAllMocks();
 
-    // Setup mock app
     mockApp = {
       useGlobalPipes: jest.fn(),
       setGlobalPrefix: jest.fn(),
@@ -46,7 +42,6 @@ describe('Main Bootstrap', () => {
       getUrl: jest.fn().mockResolvedValue('http://localhost:4000'),
     };
 
-    // Setup mocks
     mockNestFactory = NestFactory as jest.Mocked<typeof NestFactory>;
     mockSwaggerModule = SwaggerModule as jest.Mocked<typeof SwaggerModule>;
     mockDocumentBuilder = DocumentBuilder as jest.MockedClass<typeof DocumentBuilder>;
